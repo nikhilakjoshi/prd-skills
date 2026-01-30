@@ -1,11 +1,11 @@
 ---
 name: append-prd
-description: Convert requirements into testable tasks appended to a project's plans/prd.json. Use when given a PRD, feature spec, raw ideas, or requirements to break down into tasks.
+description: Convert requirements into actionable dev work items appended to a project's plans/prd.json. Use when given a PRD, feature spec, raw ideas, or requirements to break down into tasks.
 ---
 
 # append-prd
 
-Convert requirements into testable tasks appended to a project's `plans/prd.json`.
+Convert requirements into actionable dev work items appended to a project's `plans/prd.json`.
 
 ## Inputs
 
@@ -16,7 +16,7 @@ Convert requirements into testable tasks appended to a project's `plans/prd.json
 
 1. Read/parse the provided requirements
 2. Explore the repo -- understand architecture, key files, frameworks, existing code patterns
-3. Break requirements into small, independently testable tasks
+3. Break requirements into smallest actionable dev tasks
 4. Append tasks to `{project}/plans/prd.json`
 
 ## Task schema
@@ -26,10 +26,9 @@ Each task in `prd.json` follows this structure:
 ```json
 {
   "category": "functional | ui | api | data | auth | performance | ...",
-  "description": "Short task description grounded in the actual codebase",
-  "steps": [
-    "Concrete verification step referencing real files/components",
-    "Another step..."
+  "description": "Clear outcome-oriented description of what to build/change. Enough context for a dev to pick up independently.",
+  "acceptanceCriteria": [
+    "Observable result that confirms the task is done"
   ],
   "passes": false
 }
@@ -39,11 +38,11 @@ Each task in `prd.json` follows this structure:
 
 ## Rules
 
-- **Explore first**: always read the repo before generating tasks. Reference real files, components, routes, functions in steps.
+- **Explore first**: always read the repo before generating tasks. Reference real files, components, routes, functions.
 - **Append, don't overwrite**: read existing `prd.json` first, parse it, then append new tasks to the array.
 - **Create if missing**: if `plans/prd.json` or `plans/` dir doesn't exist, create them. Initialize with `[]` before appending.
 - **All tasks start unverified**: every task gets `"passes": false`.
-- **Small tasks**: each task should be independently testable. Prefer many small tasks over few large ones.
-- **Concrete steps**: verification steps must be specific enough that someone (or a test) can confirm pass/fail. Reference actual code paths, components, endpoints.
+- **Small tasks**: each task should be the smallest unit of dev work someone can pick up and complete. Prefer many small tasks over few large ones.
+- **Clear acceptance criteria**: each criterion describes an observable outcome that confirms the work is done. Reference actual code paths, components, endpoints.
 - **Appropriate categories**: use `functional`, `ui`, `api`, `data`, `auth`, `performance`, or other fitting categories. Match the nature of the task.
 - **No duplicates**: if appending to an existing prd.json, check for duplicate/overlapping tasks and skip them.
