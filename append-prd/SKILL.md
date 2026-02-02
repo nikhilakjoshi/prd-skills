@@ -27,8 +27,8 @@ Each task in `prd.json` follows this structure:
 {
   "category": "functional | ui | api | data | auth | performance | ...",
   "description": "Clear outcome-oriented description of what to build/change. Enough context for a dev to pick up independently.",
-  "acceptanceCriteria": [
-    "Observable result that confirms the task is done"
+  "steps": [
+    "Actionable step a dev follows to complete this task"
   ],
   "passes": false
 }
@@ -43,6 +43,6 @@ Each task in `prd.json` follows this structure:
 - **Create if missing**: if `plans/prd.json` or `plans/` dir doesn't exist, create them. Initialize with `[]` before appending.
 - **All tasks start unverified**: every task gets `"passes": false`.
 - **Small tasks**: each task should be the smallest unit of dev work someone can pick up and complete. Prefer many small tasks over few large ones.
-- **Clear acceptance criteria**: each criterion describes an observable outcome that confirms the work is done. Reference actual code paths, components, endpoints.
+- **Clear steps**: each step is an actionable instruction a dev can follow to execute and complete the task. Reference actual code paths, components, endpoints.
 - **Appropriate categories**: use `functional`, `ui`, `api`, `data`, `auth`, `performance`, or other fitting categories. Match the nature of the task.
 - **No duplicates**: if appending to an existing prd.json, check for duplicate/overlapping tasks and skip them.
